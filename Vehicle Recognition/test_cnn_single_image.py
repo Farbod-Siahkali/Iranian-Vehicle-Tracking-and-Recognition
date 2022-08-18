@@ -22,7 +22,7 @@ model.eval()
 
 model.to('cuda')
 
-image = Image.open("./ssss.jpg").convert('RGB')
+image = Image.open("./mm.jpg").convert('RGB')
 
 transforms = []
 transforms += [T.Resize((256, 256))]

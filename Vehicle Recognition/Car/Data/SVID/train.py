@@ -1,6 +1,6 @@
 import glob
 import os
-paths = glob.glob('./all/train/*/*.jpg')
+paths = glob.glob('./train/*/*.jpg')
 
 data = {}
 
@@ -27,7 +27,7 @@ for i, path in enumerate(paths):
 
 classes = list(data.values())
 
-categories = glob.glob('./all/train/*')
+categories = glob.glob('./train/*')
 categories = [i.split('\\')[-1] for i in categories]
 
 import numpy as np

@@ -1,5 +1,1 @@
-# Iranian Vehicle Tracking and Recognition
-
-
-<video src='https://user-images.githubusercontent.com/89969561/184888211-598e38b1-4253-40d0-833d-f196bb7023cc.mp4' width=60/>
-
+# -Iranian-Vehicle-Tracking-and-Recognition

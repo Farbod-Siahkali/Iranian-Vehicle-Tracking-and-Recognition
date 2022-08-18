@@ -216,6 +216,10 @@ def run(
                 outputs[i], attrs = strongsort_list[i].update(xywhs.cpu(), confs.cpu(), clss.cpu(), im0)
                 attrs = softmax(attrs)
                 prob, preds = torch.max(attrs, 1)
+                '''names = ['206','207i','405','Dena','HcCross','JackS5','KaraMazdaPickup','L90','MVM315H',
+                            'MVMX22','NeissanVanet','Pars','Pride131nasimsaba',
+                            'Pride132and111','Pride141','Quik','RenaultPK','RioSD','Runna','Saina',
+                            'Samand','SamandSoren','Shahin','Tiba']'''
                 names = ['206','207i','405','Arisun','Dena','HcCross','JackS5','KaraMazdaPickup','L90','MVM315H',
                             'MVMX22','NeissanVanet','Pars','PeykanSavari','PeykanVanet','Pride131nasimsaba',
                             'Pride132and111','Pride141','PrideVanet151','Quik','RenaultPK','RioSD','Runna','Saina',
@@ -232,10 +236,10 @@ def run(
                         id = output[4]
                         if id not in dict_results.keys():
                             dict_results[int(id)] = []
-                        if len(dict_results[int(id)]) > 50:
+                        if len(dict_results[int(id)]) > 10:
                             dict_results[int(id)].pop(0)
 
-                        if prob[j].item() > 0.9:
+                        if prob[j].item() > 0.3:
                             dict_results[int(id)].append(preds[j].item())
                         
                         cls = output[5]
@@ -254,13 +258,14 @@ def run(
                         if save_vid or save_crop or show_vid:  # Add bbox to image
                             c = int(cls)  # integer class
                             id = int(id)  # integer id
-                            if len(dict_results[int(id)]) > 3:
+                            if len(dict_results[int(id)]) > 5:
                                 clsss = max(set(dict_results[int(id)]), key=dict_results[int(id)].count)
 
                                 label = (str(id)+'-'+f'{names[clsss]}')
+                                del clsss
 
                             else:
-                                label = str(id)+'-'+'N'
+                                label = str(id)
 
                             annotator.box_label(bboxes, label , color=colors(c, True))
                             if save_crop:
@@ -312,7 +317,7 @@ def parse_opt():
     parser.add_argument('--yolo-weights', nargs='+', type=str, default=WEIGHTS / './yolov5/yolov5s.pt', help='model.pt path(s)')
     parser.add_argument('--strong-sort-weights', type=str, default='osnet_x1_0_msmt17.pt')
     parser.add_argument('--config-strongsort', type=str, default='strong_sort/configs/strong_sort.yaml')
-    parser.add_argument('--source', type=str, default="eee.mp4", help='file/dir/URL/glob, 0 for webcam')  
+    parser.add_argument('--source', type=str, default="fff.mp4", help='file/dir/URL/glob, 0 for webcam')  
     parser.add_argument('--imgsz', '--img', '--img-size', nargs='+', type=int, default=[640], help='inference size h,w')
     parser.add_argument('--conf-thres', type=float, default=0.5, help='confidence threshold')
     parser.add_argument('--iou-thres', type=float, default=0.5, help='NMS IoU threshold')
@@ -321,8 +326,8 @@ def parse_opt():
     parser.add_argument('--show-vid', default=True, action='store_true', help='display tracking video results')
     parser.add_argument('--save-txt', action='store_true', help='save results to *.txt')
     parser.add_argument('--save-conf', action='store_true', help='save confidences in --save-txt labels')
-    parser.add_argument('--save-crop', action='store_true', help='save cropped prediction boxes')
-    parser.add_argument('--save-vid', action='store_true', help='save video tracking results')
+    parser.add_argument('--save-crop', default=False, action='store_true', help='save cropped prediction boxes')
+    parser.add_argument('--save-vid', default=True, action='store_true', help='save video tracking results')
     parser.add_argument('--nosave', action='store_true', help='do not save images/videos')
     # class 0 is person, 1 is bycicle, 2 is car... 79 is oven
     parser.add_argument('--classes', nargs='+', type=int, default=2, help='filter by class: --classes 0, or --classes 0 2 3')
