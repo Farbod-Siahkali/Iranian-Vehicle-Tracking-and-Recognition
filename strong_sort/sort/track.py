@@ -67,7 +67,7 @@ class Track:
     """
 
     def __init__(self, detection, track_id, class_id, conf, n_init, max_age, ema_alpha,
-                 feature=None):
+                 feature=None, attr=None):
         self.track_id = track_id
         self.class_id = int(class_id)
         self.hits = 1
@@ -76,6 +76,7 @@ class Track:
         self.ema_alpha = ema_alpha
 
         self.state = TrackState.Tentative
+        self.attr = attr
         self.features = []
         if feature is not None:
             feature /= np.linalg.norm(feature)
@@ -268,6 +269,7 @@ class Track:
         detection : Detection
             The associated detection.
         """
+        self.attr = detection.attr
         self.conf = conf
         self.class_id = class_id.int()
         self.mean, self.covariance = self.kf.update(self.mean, self.covariance, detection.to_xyah(), detection.confidence)

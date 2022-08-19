@@ -14,6 +14,7 @@ from torchreid.utils.tools import download_url
 
 __all__ = ['StrongSORT']
 
+softmax = torch.nn.Softmax(dim=1)
 
 class StrongSORT(object):
     def __init__(self, 
@@ -56,9 +57,10 @@ class StrongSORT(object):
         # generate detections
         features = self._get_features(bbox_xywh, ori_img)
         attrs = features[0]
+        attrs = softmax(attrs)
         features = features[1]
         bbox_tlwh = self._xywh_to_tlwh(bbox_xywh)
-        detections = [Detection(bbox_tlwh[i], conf, features[i]) for i, conf in enumerate(
+        detections = [Detection(bbox_tlwh[i], conf, features[i], attrs[i]) for i, conf in enumerate(
             confidences)]
 
         # run on non-maximum supression
@@ -79,12 +81,12 @@ class StrongSORT(object):
             x1, y1, x2, y2 = self._tlwh_to_xyxy(box)
             
             track_id = track.track_id
-            class_id = track.class_id
+            attr = track.attr
             conf = track.conf
-            outputs.append(np.array([x1, y1, x2, y2, track_id, class_id, conf]))
+            outputs.append(np.array([x1, y1, x2, y2, track_id, attr.cpu(), conf]))
         if len(outputs) > 0:
             outputs = np.stack(outputs, axis=0)
-        return outputs, attrs
+        return outputs
 
     """
     TODO:
