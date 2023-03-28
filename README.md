@@ -8,13 +8,8 @@ In this paper, a new publicly available web-Scraped Iranian Vehicle Dataset (SIV
 Dataset available on [Drive](https://drive.google.com/drive/folders/1UaYEfc2DZJ11psUp9iQm0n-mcNiTZmSA?usp=share_link).
 <!---
 Dataset available on [Kaggle](https://www.kaggle.com/datasets/farbodsiahkali/scraped-iranian-vehicle-dataset).-->
-If you use this dataset in your research, please kindly cite our work as,
-```
-@article{
-SIVD: Dataset of Iranian Vehicles for Real-Time Multi-Camera Video Tracking and Recognition
-}
-```
-SIVD Dataset:
+If you use this work in your research, please kindly cite our work as,
+
 ```
 @INPROCEEDINGS{10043932,
   author={Siahkali, Farbod and Alavi, Seyed Amirmahdi and Masouleh, Mehdi Tale},
