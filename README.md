@@ -20,4 +20,4 @@ The SIVD dataset is described in detail in our paper, [SIVD: Dataset of Iranian 
   pages={1-7},
   doi={10.1109/ICSPIS56952.2022.10043932}}
 ```
-<p>Our research was conducted in the Human and Robot Interaction Laboratory (TaarLab) at the University of Tehran. If you have any questions or comments, please feel free to contact us at <a href="mailto:farbodsiahkali80@ut.ac.ir" target="_new">farbodsiahkali80@ut.ac.ir</a> or <a href="mailto:farbodsiahkali80@ut.ac.ir" target="_new">farbodsiahkali80@ut.ac.ir</a>.</p>
+<p>Our research was conducted in the Human and Robot Interaction Laboratory (TaarLab) at the University of Tehran. If you have any questions or comments, please feel free to contact us at <a href="mailto:siahkali@purdue.edu" target="_new">siahkali@purdue.edu</a> or <a href="mailto:farbodsiahkali80@ut.ac.ir" target="_new">farbodsiahkali80@ut.ac.ir</a>.</p>
